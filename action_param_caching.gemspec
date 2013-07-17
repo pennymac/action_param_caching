@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["chris.parratto@pnmac.com"]
   spec.description   = %q{Parameterized caching for ActionControllers}
   spec.summary       = %q{Allows for parameterized caching for action controllers.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/pennymac/action_param_caching"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
