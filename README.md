@@ -1,6 +1,6 @@
 # ActionParamCaching
 
-Action param caching simplfies action caching bases on parameter values. It allows you to quickly specify what actions you want to cache base on the parameters they are passed, the set of parameters you are interested in caching on, and an option prefix value for ignoring parameters that are designed to bust your cache.
+Action param caching simplifies action caching based on parameter values. It allows you to quickly specify what actions you want to cache base on the parameters they are passed, the set of parameters you are interested in caching on, and an option prefix value for ignoring parameters that are designed to bust your cache.
 
 ## Installation
 
@@ -22,7 +22,7 @@ Or install it yourself as:
  2. Require 'action_param_caching'
  3. Add 'extend ActionParamCaching::Rails::ActionController' to your controller
  4. Add the correct param cache statement to your controller.
-    - Standard statement for full param chaching:
+    - Standard statement for full param caching:
       cache_with_params :on => [:index]
     - Cache on a set or subset
       cache_with_params :on => [:index], :with_set_or_subset => [:param1, :param2]
