@@ -3,11 +3,27 @@ module ActionParamCaching
     attr_reader :action, :valid_params, :filter_starting_with, :argz
     attr_accessor :did_config_cache
 
-    def initialize(action, valid_params = [], filter_starting_with = nil)
+    def self.store_lookup(controller, action, config)
+       @lookup = {} if @lookup.nil?
+       @lookup[controller] = {} if @lookup[controller].nil?
+       @lookup[controller][action] = config
+    end
+
+    def self.lookup
+      @lookup
+    end
+
+    def initialize(controller_path, action, valid_params = [], filter_starting_with = nil)
       @action = action
-      @valid_params = valid_params
+      if valid_params
+        @valid_params = valid_params
+        @valid_params << :controller << :action << :format
+      end
       @filter_starting_with = filter_starting_with
+      @filter_starting_with ||= '_'
       @did_config_cache = false
+
+      ActionParamCaching::ActionConfig.store_lookup(controller_path, action, self)
     end
 
     def cache_args
@@ -27,15 +43,19 @@ module ActionParamCaching
     end
 
     def filtered_path_proc
-      Proc.new { |request| params.delete_if { |k,v| k.to_s.start_with?(@filter_starting_with) }.to_query }
+      Proc.new { |request|
+        request.params.delete_if { |k,v| k.to_s.start_with?(
+                                                            ActionParamCaching::ActionConfig.lookup[request.params[:controller]][request.params[:action].to_sym].filter_starting_with) }.to_query }
     end
 
     def path_proc
-      Proc.new { |request| params.to_query }
+      Proc.new { |request| request.params.to_query }
     end
 
     def if_proc
-      Proc.new { params.collect{|key, value| @valid_params.include?(key)}.all? }
+      Proc.new { |request|
+        request.params.collect{|key, value| ActionParamCaching::ActionConfig.lookup[request.params[:controller]][request.params[:action].to_sym].valid_params.include?(key.to_sym) ||
+                                            key.to_s.start_with?(ActionParamCaching::ActionConfig.lookup[request.params[:controller]][request.params[:action].to_sym].filter_starting_with)}.all? }
     end
   end
 end
