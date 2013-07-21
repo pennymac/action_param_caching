@@ -15,7 +15,7 @@ module ActionParamCaching
 
     def initialize(controller_path, action, valid_params = [], filter_starting_with = nil)
       @action = action
-      if valid_params
+      if valid_params and !valid_params.empty?
         @valid_params = valid_params
         @valid_params << :controller << :action << :format
       end

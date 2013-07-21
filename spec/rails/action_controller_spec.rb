@@ -4,6 +4,9 @@ class TestController
   extend ActionParamCaching::Rails::ActionController
   def self.caches_action(action, args)
   end
+  def self.controller_path
+    "some_controller"
+  end
 end
 
 module ActionParamCaching
@@ -20,7 +23,7 @@ module ActionParamCaching
 
       it "provided a means to set a set or subset or params to cache on" do
         TestController.cache_with_params :on => [:test2], :with_set_or_subset => [:param1, :param2]
-        TestController.action_cache_configs[:test2].valid_params.should == [:param1, :param2]
+        TestController.action_cache_configs[:test2].valid_params.should == [:param1, :param2, :controller, :action, :format]
       end
 
       it "provides a means to filter params that have a prefix" do
