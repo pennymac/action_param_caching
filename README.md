@@ -1,4 +1,4 @@
-# ActionParamCaching
+# ActionParamCaching [![Build Status](https://magnum.travis-ci.com/pennymac/action_param_caching.png?token=2hUK2zUy1xXfgKRQVa2A&branch=master)](https://magnum.travis-ci.com/pennymac/action_param_caching)
 
 Action param caching simplifies action caching based on parameter values. It allows you to quickly specify what actions you want to cache base on the parameters they are passed, the set of parameters you are interested in caching on, and an option prefix value for ignoring parameters that are designed to bust your cache.
 
