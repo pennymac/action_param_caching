@@ -18,6 +18,10 @@ module ActionParamCaching
             config.did_config_cache = true
           end
         end
+
+        if options[:expires_in]
+          caches_action :expires_in => options[:expires_in]
+        end
       end
     end
   end
