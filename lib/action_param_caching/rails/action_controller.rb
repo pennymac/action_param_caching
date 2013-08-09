@@ -7,7 +7,7 @@ module ActionParamCaching
         @action_cache_configs = {} if @action_cache_configs.nil?
 
         options[:on].each do |action|
-          @action_cache_configs[action] = ActionParamCaching::ActionConfig.new(self.controller_path, action, options[:with_set_or_subset], options[:filter_starting_with]) unless @action_cache_configs[action]
+          @action_cache_configs[action] = ActionParamCaching::ActionConfig.new(self.controller_path, action, options[:with_set_or_subset], options[:filter_starting_with], options[:expires_in]) unless @action_cache_configs[action]
         end
 
         options[:on].each do |action|

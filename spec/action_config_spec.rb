@@ -79,6 +79,14 @@ module ActionParamCaching
         proc = cache_args[:if]
         proc.call(request).should be_false
       end
+      
+      it "adds expires in parameter to action arguments" do
+        cache_config = ActionParamCaching::ActionConfig.new("some_controller", :index, [:id, :name, :amount], nil, 24.hours)
+        cache_args = cache_config.cache_args
+        request = mock
+        request.stubs(:params).returns( {:id => 23, :name => "test", :not => "valid", :controller => "some_controller", :action => :index, :format => 'json', :expires_in => 24.hours} )
+        cache_args[:expires_in].should eq(24.hours)
+      end
     end
   end
 end
