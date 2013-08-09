@@ -1,6 +1,6 @@
 module ActionParamCaching
   class ActionConfig
-    attr_reader :action, :valid_params, :filter_starting_with, :argz
+    attr_reader :action, :valid_params, :filter_starting_with, :argz, :expires_in
     attr_accessor :did_config_cache
 
     def self.store_lookup(controller, action, config)
@@ -13,7 +13,7 @@ module ActionParamCaching
       @lookup
     end
 
-    def initialize(controller_path, action, valid_params = [], filter_starting_with = nil)
+    def initialize(controller_path, action, valid_params = [], filter_starting_with = nil, expires_in = nil)
       @action = action
       if valid_params and !valid_params.empty?
         @valid_params = valid_params
@@ -22,6 +22,7 @@ module ActionParamCaching
       @filter_starting_with = filter_starting_with
       @filter_starting_with ||= '_'
       @did_config_cache = false
+      @expires_in = expires_in
 
       ActionParamCaching::ActionConfig.store_lookup(controller_path, action, self)
     end
@@ -37,6 +38,10 @@ module ActionParamCaching
            @argz[:cache_path] = self.filtered_path_proc
          else
            @argz[:cache_path] = self.path_proc
+         end
+
+         if @expires_in
+           @argz[:expires_in] = self.expires_in
          end
 
          @argz
