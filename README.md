@@ -2,6 +2,11 @@
 
 Action param caching simplifies action caching based on parameter values. It allows you to quickly specify what actions you want to cache based on the parameters they are passed, the set of parameters you are interested in caching on, and an option prefix value for ignoring parameters that are designed to bust your cache.
 
+## Which Version to Use?
+
+* For Rails 3.2.x apps, use version ```0.0.6```
+* For Rails 4.0.x apps, use ```0.1.0```
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -30,6 +35,10 @@ Or install it yourself as:
       cache_with_params :on => [:index], :filter_starting_with => '_'
     - Expiring Cache
       cache_with_params :on => [:index], :expires_in => 24.hours
+
+## Running Specs
+
+* bundle exec rake spec
 
 ## Contributing
 
