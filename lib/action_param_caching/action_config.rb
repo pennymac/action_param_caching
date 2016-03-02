@@ -28,23 +28,23 @@ module ActionParamCaching
     end
 
     def cache_args
-         @argz = {}
+      @argz = {}
 
-         if @valid_params && @valid_params.any?
-           @argz[:if] = self.if_proc
-         end
+      if @valid_params && @valid_params.any?
+        @argz[:if] = self.if_proc
+      end
 
-         if @filter_starting_with
-           @argz[:cache_path] = self.filtered_path_proc
-         else
-           @argz[:cache_path] = self.path_proc
-         end
+      if @filter_starting_with
+        @argz[:cache_path] = self.filtered_path_proc
+      else
+        @argz[:cache_path] = self.path_proc
+      end
 
-         if @expires_in
-           @argz[:expires_in] = self.expires_in
-         end
+      if @expires_in
+        @argz[:expires_in] = self.expires_in
+      end
 
-         @argz
+      @argz
     end
 
     def filtered_path_proc
