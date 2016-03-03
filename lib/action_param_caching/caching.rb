@@ -1,3 +1,5 @@
+# require 'active_support/concern' # May not need this line
+
 module ActionParamCaching
   module Caching
     extend ActiveSupport::Concern
