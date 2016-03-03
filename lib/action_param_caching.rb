@@ -1,7 +1,14 @@
-require "action_param_caching/version"
-require "action_param_caching/action_config"
-require "action_param_caching/rails/action_controller"
+require 'action_param_caching/railtie'
+require 'action_param_caching/caching'
 
 module ActionParamCaching
-  # Your code goes here...
+  extend ActiveSupport::Autoload
+
+  eager_autoload do
+    autoload :Caching
+  end
+
+  include Caching
 end
+
+ActionController::Base.send(:include, ActionParamCaching::Caching)

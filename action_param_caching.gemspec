@@ -6,7 +6,7 @@ require 'action_param_caching/version'
 Gem::Specification.new do |spec|
   spec.name          = "action_param_caching"
   spec.version       = ActionParamCaching::VERSION
-  spec.authors       = ["cparratto"]
+  spec.authors       = ["cparratto", "M. Daniel Dyba"]
   spec.email         = ["chris.parratto@pnmac.com"]
   spec.description   = %q{Parameterized caching for ActionControllers}
   spec.summary       = %q{Allows for parameterized caching for action controllers.}
@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "actionpack-action_caching", "1.1.0"
+  spec.add_dependency "actionpack", '>= 4.0.0', '< 5.0'
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
